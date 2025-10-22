@@ -39,4 +39,6 @@ jobs:
 
     - name: SPDX Dependency Submission Action
       uses: advanced-security/spdx-dependency-submission-action@v0.1.1
-      
+
+    - name: SBOM submission action
+      uses: evryfs/sbom-dependency-submission-action@v0.0.14
