@@ -113,7 +113,3 @@ This project is licensed under the MIT License – see LICENSE
 
 
 ---
-
-If you want, I can also **add a “Quick Start” section** with example build & flash commands for STM32 — that makes the README even more practical.  
-
-Do you want me to add that?
