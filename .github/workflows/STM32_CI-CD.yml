@@ -35,3 +35,7 @@ jobs:
       run: |
         cd build/debug
         ctest -C Debug -T test --output-on-failure -R ^ceedling_all$
+
+    - name: SPDX Dependency Submission Action
+      uses: advanced-security/spdx-dependency-submission-action@v0.1.1
+      
