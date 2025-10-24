@@ -37,8 +37,7 @@ jobs:
         cd build/debug
         ctest -C Debug -T test --output-on-failure -R ^ceedling_all$
 
+    # 5️⃣ Generate SBOM through sbom-tool from Microsoft
     - name: SPDX Dependency Submission Action
       uses: advanced-security/spdx-dependency-submission-action@v0.1.1
-
-    - name: SBOM submission action
-      uses: evryfs/sbom-dependency-submission-action@v0.0.14
+      
