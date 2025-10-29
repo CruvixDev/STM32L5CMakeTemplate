@@ -1,0 +1,37 @@
+name: STM32 CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/cruvixdev/stm32-ci:latest
+
+    steps:
+    # 1️⃣ Get the code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    # 2️⃣ Configure the CMake project
+    - name: Configure STM32 project
+      run: |
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=./cmake/gcc-arm-none-eabi.cmake -S . -B ./build/debug -G Ninja
+
+    # 3️⃣ Compile the project
+    - name: Build firmware
+      run: |
+        cmake --build ./build/debug --target all --
+
+    # 4️⃣ Run Ceedling tests via CTest
+    - name: Run Ceedling tests
+      run: |
+        cd build/debug
+        ctest -C Debug -T test --output-on-failure -R ^ceedling_all$
